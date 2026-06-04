@@ -83,7 +83,7 @@ public class ProductController {
 
     @PostMapping("/{id}/edit")
     public String editProduct(@PathVariable Long id,
-                              @Valid @ModelAttribute("productDto") ProductDto productDto,
+                              @Valid @ModelAttribute ProductDto productDto,
                               BindingResult bindingResult,
                               Model model,
                               RedirectAttributes redirectAttributes) {

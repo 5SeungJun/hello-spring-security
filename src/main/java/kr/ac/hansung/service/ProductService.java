@@ -58,7 +58,9 @@ public class ProductService {
 
         product.setName(dto.getName());
         product.setPrice(dto.getPrice());
-        product.setDescription(dto.getDescription());
+        if(dto.getDescription() != null){
+            product.setDescription(dto.getDescription());
+        }
         product.setStock(dto.getStock());
 
         return product;
