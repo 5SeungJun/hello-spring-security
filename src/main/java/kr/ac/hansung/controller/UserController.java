@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,13 +21,14 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/user/password")
-    public String passwordForm() {
+    public String passwordForm(Model model) {
+        model.addAttribute("passwordChangeDto", new PasswordChangeDto());
         return "user/password";
     }
 
     @PostMapping("/user/password")
     public String changePassword(@AuthenticationPrincipal UserDetails userDetails,
-                                 @Valid @ModelAttribute PasswordChangeDto dto,
+                                 @Valid @ModelAttribute("passwordChangeDto") PasswordChangeDto dto,
                                  BindingResult bindingResult,
                                  RedirectAttributes ra) {
         if (bindingResult.hasErrors()) return "user/password";
